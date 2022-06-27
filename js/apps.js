@@ -7,7 +7,6 @@ let clearbtn = document.querySelector('#clear');
 let evaluate = document.querySelector('#evaluate');
 
 
-
 // Visor da calculadora
 let realTimeScreenValue = []
 
