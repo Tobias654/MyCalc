@@ -6,6 +6,9 @@ let erasebtn = document.querySelector('#erase');
 let clearbtn = document.querySelector('#clear');
 let evaluate = document.querySelector('#evaluate');
 
+const validacao1 = new RegExp('^[-%*+\/]');
+const validacao2 = new RegExp('[*-\/+.%]{2}');
+
 
 // Visor da calculadora
 let realTimeScreenValue = []
@@ -15,7 +18,7 @@ clearbtn.addEventListener("click", () => {
 
     realTimeScreenValue = [''];
     answerScreen.innerHTML = 0;
-    currentInput.className = 'currentInput'
+    currentInput.className = 'currentInput';
     answerScreen.className = 'answerScreen';
     answerScreen.style.color = " rgba(150, 150, 150, 0.87)";
 })
@@ -31,6 +34,25 @@ buttons.forEach((btn) => {
             realTimeScreenValue.push(btn.value)
             currentInput.innerHTML = realTimeScreenValue.join('');
 
+            
+            currentInput.className = 'currentInput';
+            answerScreen.className = 'answerScreen';
+            answerScreen.style.color = "rgba(150, 150, 150, 0.87)";
+
+
+
+            
+            if(validacao1.test(currentInput.innerHTML)){
+                realTimeScreenValue.pop();
+                currentInput.innerHTML = realTimeScreenValue.join('');
+            }
+            
+            if(validacao2.test(currentInput.innerHTML)){
+                realTimeScreenValue.pop();
+                currentInput.innerHTML = realTimeScreenValue.join('');
+
+            }
+
             // Executar e mostrar a resposta em tempo real
             if (btn.classList.contains('num_btn')) {
 
@@ -42,6 +64,13 @@ buttons.forEach((btn) => {
 
         // Quando o evento for um botão
         if (btn.id.match('erase')) {
+
+            currentInput.className = 'currentInput';
+            answerScreen.className = 'answerScreen';
+            answerScreen.style.color = "rgba(150, 150, 150, 0.87)";
+
+
+
             realTimeScreenValue.pop();
             currentInput.innerHTML = realTimeScreenValue.join('');
             answerScreen.innerHTML = eval(realTimeScreenValue.join(''));
